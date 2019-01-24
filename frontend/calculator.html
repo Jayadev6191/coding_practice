@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Calculator</title>
+    <style>
+      /* --------------------
+     Add your styling here
+     -------------------- */
+      .calculator {
+        width: 200px;
+        height: 300px;
+        background-color: orange;
+        padding: 10px;
+        margin: 0 auto;
+      }
+
+      #result {
+        background-color: gray;
+        color: #000000;
+        height: 50px;
+      }
+
+      #keypad {
+        background-color: lightgray;
+        text-align: center;
+        margin-top: 10px;
+      }
+
+      #keypad div {
+          position: relative;
+      }
+
+      #keypad div span {
+        cursor: pointer;
+        display: inline-block;
+        width: 40px;
+        height: 40px;
+        line-height: 40px;
+        margin: 3px;
+        border-radius: 50%;
+        background-color: #FAFAFA;
+      }
+
+    </style>
+  </head>
+  <body>
+    <div class="calculator">
+      <!--
+        --------------------
+        Add your markup here
+              %
+        1 2 3 x
+        4 5 6 +
+        7 8 9 -
+        . 0 c =
+        ----------------------
+      -->
+      <div id="result"></div>
+      <div id="keypad">
+        <div><span>7</span> <span>8</span> <span>9</span> <span>-</span></div>
+        <div><span>4</span> <span>5</span> <span>6</span> <span>+</span></div>
+        <div><span>1</span> <span>2</span> <span>3</span> <span>x</span></div>
+        <div><span>.</span> <span>0</span> <span>c</span> <span>=</span></div>
+      </div>
+    </div>
+    <script>
+      function Calculator() {}
+
+      Calculator.prototype.keyPadPress = function() {
+          console.log("key pressed");
+      }
+
+    </script>
+  </body>
+</html>

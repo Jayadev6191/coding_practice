@@ -16,7 +16,7 @@ BST.prototype.insert = function(node) {
         var currentNode = this.root;
 
         while(currentNode) {
-            if(currentNode.left) 
+            // if(currentNode.left) 
         }
     }
 }

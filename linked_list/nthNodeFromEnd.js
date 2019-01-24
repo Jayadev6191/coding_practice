@@ -51,8 +51,8 @@ SinglyLinkedList.prototype.nthFromEnd = function(index) {
         console.log("index is greater than linked list length");
         return;
     }
-    console.log(first);
-    console.log(second);
+
+    return first.data;
 };
 
 var list = new SinglyLinkedList();
@@ -60,5 +60,4 @@ list.insert(20);
 list.insert(25);
 list.insert(30);
 list.insert(35);
-// list.findFromEnd(1);
-list.nthFromEnd(7);
+console.log(list.nthFromEnd(2));
