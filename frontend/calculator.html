@@ -16,15 +16,22 @@
       }
 
       #result {
+        width: 100%;
+        height: 30px;
+        border: 1px solid #000;
         background-color: gray;
-        color: #000000;
-        height: 50px;
+        color: #FFF;
+        text-align: right;
+        font-size: 25px;
+        border-radius: 5px;
       }
 
       #keypad {
         background-color: lightgray;
-        text-align: center;
+        text-align: right;
         margin-top: 10px;
+        height: 85%;
+        border-radius: 5px;
       }
 
       #keypad div {
@@ -40,6 +47,7 @@
         margin: 3px;
         border-radius: 50%;
         background-color: #FAFAFA;
+        text-align: center;
       }
 
     </style>
@@ -58,19 +66,97 @@
       -->
       <div id="result"></div>
       <div id="keypad">
-        <div><span>7</span> <span>8</span> <span>9</span> <span>-</span></div>
-        <div><span>4</span> <span>5</span> <span>6</span> <span>+</span></div>
-        <div><span>1</span> <span>2</span> <span>3</span> <span>x</span></div>
-        <div><span>.</span> <span>0</span> <span>c</span> <span>=</span></div>
+        <div>
+            <span class="key">/</span> 
+        </div>
+        <div>
+          <span class="key">7</span> 
+          <span class="key">8</span> 
+          <span class="key">9</span> 
+          <span class="key">-</span>
+        </div>
+        <div>
+          <span class="key">4</span> 
+          <span class="key">5</span> 
+          <span class="key">6</span> 
+          <span class="key">+</span>
+        </div>
+        <div>
+          <span class="key">1</span> 
+          <span class="key">2</span> 
+          <span class="key">3</span> 
+          <span class="key">x</span>
+        </div>
+        <div>
+          <span class="key">.</span>
+          <span class="key">0</span> 
+          <span class="key">c</span> 
+          <span class="key">=</span>
+        </div>
       </div>
     </div>
     <script>
-      function Calculator() {}
+        let keypad = document.getElementById("keypad");
+        let set = new Set(['=','x','+','-','c','/']);
+        let current_operation = null;
+        document.getElementById('result').innerHTML = "0";
+        let result = 0;
 
-      Calculator.prototype.keyPadPress = function() {
-          console.log("key pressed");
-      }
+        keypad.addEventListener('click', (e) => {
+          if(e.target && e.target.className == "key") {
+            let val = e.target.textContent;
+          
+            if(!set.has(val)) {
+              // the val must be a number or a decimal
+              if(!current_operation) {
+                // if current operation is null - append as string
+                result === 0 ? result = val : result += val;
+                console.log(result);
+              } else {
+                // else convert val to number and add update the result
+                current_operation === "+" ?  result = Number(result) + Number(val) : null;
+                current_operation === "-" ?  result = Number(result) - Number(val) : null;
+                current_operation === "x" ?  result = Number(result) * Number(val) : null;
+                current_operation === "/" ?  result = Number(result) / Number(val) : null;
+              }
+            } else {
+              // operations or decimal (.)
+              switch(val) {
+                case ".":
+                  current_operation = val;
+                  break;
+                case "+":
+                  if(result != "")
+                    current_operation = "+";
+                  break;
+                case "-":
+                  if(result != "")
+                    current_operation = "-";
+                  break;
+                case "x":
+                  if(result != "")
+                    current_operation = "x";
+                  break;
+                case "c":
+                  result = 0;
+                  current_operation = null;
+                  break;
+                case "/":
+                  if(result != "")
+                    current_operation = "/";
+                  break;
+                case "=":
+                  if(result != "")
+                    document.getElementById('result').innerHTML = result;
+                  break;
+                default:
+                  break;
+              };
+            }
+          }
 
+          document.getElementById('result').innerHTML = result;
+        });
     </script>
   </body>
 </html>
